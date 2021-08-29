@@ -10,10 +10,10 @@ body {
 
 .custom-input {
     border: none;
-    font-size: 2rem;
+    font-size: 1.25rem;
     width: auto;
     text-align: center;
-    max-width: 10rem;
+    max-width: 4rem;
 }
 
 .element-wrapper {

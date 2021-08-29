@@ -1,35 +1,69 @@
-const input = document.getElementById('custom-input')
-const minVal = parseInt(input.min, 10)
-const maxVal = parseInt(input.max, 10)
+const customNumber = document.getElementById('custom-number')
+const customNumberMinVal = parseInt(customNumber.min, 10)
+const customNumberMaxVal = parseInt(customNumber.max, 10)
+const customNumberWarning = document.getElementById('warning-custom-number')
+
+const slowedNumbers = document.getElementById('slowed-numbers')
+const slowedNumbersMinVal = parseInt(slowedNumbers.min, 10)
+const slowedNumbersMaxVal = parseInt(slowedNumbers.max, 10)
+const slowedNumbersWarning = document.getElementById('warning-slowed-numbers')
+
+const delayIncrement = document.getElementById('delay-increment')
+const delayIncrementMinVal = parseInt(delayIncrement.min, 10)
+const delayIncrementMaxVal = parseInt(delayIncrement.max, 10)
+const delayIncrementWarning = document.getElementById('warning-delay-increment')
+
 const animBtn = document.getElementById('animate-btn')
-const warning = document.getElementById('warning')
-const counter = document.getElementById('counter')
-let counterVal = parseInt(counter.innerHTML, 10)
+const numberDisplay = document.getElementById('number-display')
+
+let counterVal = parseInt(numberDisplay.innerHTML, 10)
 let numbersRange = []
+let delay = 0
+let slowedNums = 0
 
 animBtn.addEventListener('click', btnClick)
 
 function btnClick() {
+    // disable button click until action is resolved
     animBtn.classList.add('disabled')
-    validateInput()
-}
-
-function validateInput() {
-    let inputVal = parseInt(input.value, 10)
-    if(inputVal >= minVal && inputVal <= maxVal) {
-        warning.classList.add('hidden')
-        animateCount(counterVal, inputVal)
+    
+    // grab number input value
+    let numberInputVal = parseInt(customNumber.value, 10)
+    // if input value is valid
+    if(numberInputVal >= customNumberMinVal && numberInputVal <= customNumberMaxVal) {
+        // hide number warning
+        customNumberWarning.classList.add('hidden')
+        // call animate func
+        animateCount(counterVal, numberInputVal)
     } else {
-        warning.classList.remove('hidden')
+        // show number warning
+        customNumberWarning.classList.remove('hidden')
+        // enable button click
         animBtn.classList.remove('disabled')
     }
 }
 
 function animateCount(start, end) {
     numbersRange = getRange(start, end)
-    writeNumbers(numbersRange)
-
     counterVal = end
+
+    let newSlowedNums = parseInt(slowedNumbers.value, 10)
+    let newDelay = parseInt(delayIncrement.value, 10)
+
+    if(
+        newSlowedNums >= slowedNumbersMinVal &&
+        newSlowedNums <= slowedNumbersMaxVal &&
+        newDelay >= delayIncrementMinVal &&
+        newDelay <= delayIncrementMaxVal
+    ) {
+        slowedNumbersWarning.classList.add('hidden')
+        delayIncrementWarning.classList.add('hidden')
+        writeNumbers(numbersRange, newSlowedNums, newDelay)
+    } else {
+        slowedNumbersWarning.classList.remove('hidden')
+        delayIncrementWarning.classList.remove('hidden')
+        animBtn.classList.remove('disabled')
+    }
 }
 
 function getRange(start, end) {
@@ -40,14 +74,16 @@ function getRange(start, end) {
     }
 }
 
-function writeNumbers(numbers) {
+function writeNumbers(numbers, numOfSlowedNumbers, delayInc) {
+    delay = numbers.length < numOfSlowedNumbers ? delay + delayInc : delay
     let currentNumber = numbers.shift().toString()
-    counter.innerHTML = currentNumber
+    numberDisplay.innerHTML = currentNumber
     if (numbers.length) {
         setTimeout(function() {
-            writeNumbers(numbers);
-        }, 0)
+            writeNumbers(numbers, numOfSlowedNumbers, delayInc);
+        }, delay)
     } else {
         animBtn.classList.remove('disabled')
+        delay = 0
     }
 }
