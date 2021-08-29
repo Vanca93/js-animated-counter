@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Animated Counter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="centered">
+        <h1>Animated Counter</h1>
+
+        <div class="element-wrapper">
+            <input id="custom-input" class="custom-input" type="number" id="custom-number" min="-1000" max="1000">
+            <p id="warning" class="hidden">Please enter a number between -1000 and 1000 to animate towards it</p>
+        </div>
+
+        <div class="element-wrapper">
+            <button id="animate-btn">Animate Counting</button>
+        </div>
+
+        <div class="element-wrapper">
+            <h2 id="counter">0</h2>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

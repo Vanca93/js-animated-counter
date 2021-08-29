@@ -1,0 +1,68 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: lightgray;
+}
+
+.centered {
+    text-align: center;
+}
+
+.custom-input {
+    border: none;
+    font-size: 2rem;
+    width: auto;
+    text-align: center;
+    max-width: 10rem;
+}
+
+.element-wrapper {
+    margin: 2rem 0;
+}
+
+button {
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: lightsalmon;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: lightcyan;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+h2 {
+    font-size: 6rem;
+    line-height: 6rem;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input {
+    outline: none;
+    padding: 0.5rem 1rem;
+    background: white;
+    box-shadow: none;
+}
